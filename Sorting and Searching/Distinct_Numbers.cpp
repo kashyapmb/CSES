@@ -13,9 +13,9 @@ using namespace std;
 #define pof pop_front
 #define lb lower_bound
 #define ub upper_bound
-#define ZERO cout<<0<<endl;
-#define ONE cout<<1<<endl;
-#define TWO cout<<2<<endl;
+#define ZZ cout<<0<<endl;
+#define OO cout<<1<<endl;
+#define TT cout<<2<<endl;
 #define no cout<<"no"<<endl;
 #define No cout<<"No"<<endl;
 #define NO cout<<"NO"<<endl;
@@ -37,16 +37,15 @@ int modularExponentiation(int x, int n, int m);
 // RadheKrishna //
 
 void solve(){
-    int n , x, num=0;
+    int n;
     cin>>n;
-    for(int i=1;i<n;i++){
+    unordered_set<int>st;
+    for(int i=0;i<n;i++){
+        int x;
         cin>>x;
-        num^=x;
+        st.insert(x);
     }
-    for(int i=1;i<=n;i++)
-        num^=i;
-    
-    cout<<num<<endl;
+    cout<<st.size()<<endl;
 }
 
 signed main(){
@@ -191,7 +190,7 @@ ll count_set_bit(ll n)
     ll count = 0;
     while(n != 0)
     {
-        if(n & 1 == 1)
+        if((n & 1) == 1)
         {
             count++;
         }

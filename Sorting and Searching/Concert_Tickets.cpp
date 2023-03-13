@@ -13,40 +13,66 @@ using namespace std;
 #define pof pop_front
 #define lb lower_bound
 #define ub upper_bound
-#define ZERO cout<<0<<endl;
-#define ONE cout<<1<<endl;
-#define TWO cout<<2<<endl;
+#define ZZ cout<<0<<endl;
+#define OO cout<<1<<endl;
+#define TT cout<<2<<endl;
+#define MO cout<<-1<<endl;
 #define no cout<<"no"<<endl;
 #define No cout<<"No"<<endl;
 #define NO cout<<"NO"<<endl;
 #define yes cout<<"yes"<<endl;
 #define Yes cout<<"Yes"<<endl;
 #define YES cout<<"YES"<<endl;
+#define vi vector<int>
+#define vb vector<bool>
+#define si set<int>
+#define mii map<int,int>
+#define msi map<string,int>
+#define pii pair<int,int>
+#define all(x) (x).begin(), (x).end()
+#define c(x) cout<<(x)<<endl;
+#define cs(x) cout<<(x)<<" ";
+#define ce cout<<endl;
 bool is_prime(ll x);
 bool is_power2(ll n);
+int gcd(int a, int b);
+int lcm(int a, int b);
 ll count_set_bit(ll n);
 bool isPerfectSquare(ll x);
 bool ispallindrome(string s);
 ll SieveOfEratosthenes(ll n);
-vector<ull> getfactors(ull n);
-ull gethighestoddfactor(ull n);
+vector<ll> getfactors(ll n);
+ll gethighestoddfactor(ll n);
 void get_factors_set(ll n,set<ll> &st);
 vector<int> allprimebetween(int l,int r);
+bool cmp1(int a, int b);
+bool cmp(pair<int, int> a, pair<int, int> b);
 int modularExponentiation(int x, int n, int m);
 
-// RadheKrishna //
+// Jai Shree Ram //
 
 void solve(){
-    int n , x, num=0;
-    cin>>n;
-    for(int i=1;i<n;i++){
+    int n,m;
+    cin>>n>>m;
+    multiset<int> s;
+    for(int i=0;i<n;i++){
+        int x;
         cin>>x;
-        num^=x;
+        s.insert(x);
     }
-    for(int i=1;i<=n;i++)
-        num^=i;
-    
-    cout<<num<<endl;
+    for(int i=0;i<m;i++){
+        int x;
+        cin>>x;
+        auto it = s.upper_bound(x);
+        if(it==s.begin()){
+            c(-1)
+        }
+        else{
+            it--;
+            c(*it)
+            s.erase(it);
+        }
+    }
 }
 
 signed main(){
@@ -59,6 +85,26 @@ signed main(){
     }
 }
 
+int gcd(int a, int b)
+{
+    return b == 0 ? a : gcd(b, a % b);
+}
+int lcm(int a, int b)
+{
+    return (a * b) / (gcd(a, b));
+}
+bool cmp(pair<int, int> a, pair<int, int> b)
+{	// <<incinc, <>incdec, ><decinc, >>decdec
+    if (a.first != b.first)
+        return a.first > b.first;
+    return a.second > b.second;
+}
+bool cmp1(int a, int b)
+{   // < increasing, > decreasing
+    if (a > b)
+        return true;
+    return false;
+}
 vector<int> allprimebetween(int l,int r)
 {
     vector<bool> v(1000005,true);
@@ -94,10 +140,10 @@ void get_factors_set(ll n,set<ll> &st)
         }
     }
 }
-vector<ull> getfactors(ull n)
+vector<ll> getfactors(ll n)
 {
-    vector<ull> v;
-    for(ull i=1;i*i<=n;i++)
+    vector<ll> v;
+    for(ll i=1;i*i<=n;i++)
     {
         if(n%i==0)
         {
@@ -115,7 +161,7 @@ vector<ull> getfactors(ull n)
     sort(v.begin(),v.end());
     return v;
 }
-ull gethighestoddfactor(ull n)
+ll gethighestoddfactor(ll n)
 {
     while(n>0)
     {
